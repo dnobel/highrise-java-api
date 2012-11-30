@@ -1,6 +1,4 @@
-<project
-	xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
                       http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
@@ -20,10 +18,11 @@
 		<profile>
 			<id>web</id>
 			<activation>
-				<activeByDefault>true</activeByDefault>
+				<property>
+					<name>web-build</name>
+				</property>
 			</activation>
 			<dependencies>
-
 				<dependency>
 					<groupId>org.springframework</groupId>
 					<artifactId>spring-webmvc</artifactId>
@@ -58,8 +57,9 @@
 		<profile>
 			<id>android</id>
 			<activation>
-				<activeByDefault>false</activeByDefault>
-				<property><name>ANDROID</name></property>
+				<property>
+					<name>android-build</name>
+				</property>
 			</activation>
 			<dependencies>
 				<dependency>
@@ -104,46 +104,11 @@
 			</dependencies>
 		</profile>
 	</profiles>
+	<build>
+		<plugins>
+		</plugins>
+	</build>
 	<dependencies>
-<dependency>
-					<groupId>org.springframework.android</groupId>
-					<artifactId>spring-android-rest-template</artifactId>
-					<version>1.0.0.RELEASE</version>
-				</dependency>
-				<dependency>
-					<groupId>commons-codec</groupId>
-					<artifactId>commons-codec</artifactId>
-					<version>1.4</version>
-					<scope>compile</scope>
-				</dependency>
-				<dependency>
-					<!-- android 4x from the central repository -->
-					<groupId>com.google.android</groupId>
-					<artifactId>android</artifactId>
-					<version>4.0.1.2</version>
-					<scope>provided</scope>
-				</dependency>
-				<dependency>
-					<groupId>org.simpleframework</groupId>
-					<artifactId>simple-xml</artifactId>
-					<version>2.6.7</version>
-					<exclusions>
-						<!-- StAX is not available on Android -->
-						<exclusion>
-							<artifactId>stax</artifactId>
-							<groupId>stax</groupId>
-						</exclusion>
-						<exclusion>
-							<artifactId>stax-api</artifactId>
-							<groupId>stax</groupId>
-						</exclusion>
-						<!-- Provided by Android -->
-						<exclusion>
-							<artifactId>xpp3</artifactId>
-							<groupId>xpp3</groupId>
-						</exclusion>
-					</exclusions>
-				</dependency>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
