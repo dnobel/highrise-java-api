@@ -11,8 +11,8 @@ public class HighriseClientTest {
 
     @Test
     public void getMe() throws Exception {
-        highriseClient = HighriseClient.create("https://supshowcase.highrisehq.com/");
-        Assert.assertNotNull(highriseClient.auth("highrise_test@itemis.de", "1tem1s"));
+        highriseClient = HighriseClient.create("X");
+        Assert.assertNotNull(highriseClient.auth("X", "X"));
         Assert.assertNotNull(highriseClient.getResource(UserResource.class).getMe());
         Assert.assertNotNull(highriseClient.getResource(PersonResource.class).getAll());
         Assert.assertNotNull(highriseClient.getResource(PersonResource.class).get(120593863));
