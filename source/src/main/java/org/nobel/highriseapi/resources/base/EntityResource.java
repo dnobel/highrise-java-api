@@ -12,8 +12,13 @@ public abstract class EntityResource<T extends Entity> {
 
 	public class RemoteEntityAccessorWithCacheSupport<V extends Entity> extends EntityAccessorWithCacheSupport<V> {
 
-		private final Class<?> type;
+		private Class<?> type;
 		private final String url;
+
+		public RemoteEntityAccessorWithCacheSupport(String url, Map<Integer, Entity> cache) {
+			super(cache);
+			this.url = url;
+		}
 
 		public RemoteEntityAccessorWithCacheSupport(String url, Class<?> type, Map<Integer, Entity> cache) {
 			super(cache);
@@ -35,6 +40,12 @@ public abstract class EntityResource<T extends Entity> {
 
 		private Object getRemoteEntity() {
 			return getRemoteEntityManager().getEntity(url, createTokenBasedUserCredentials(), type);
+		}
+
+		@SuppressWarnings("unchecked")
+		@Override
+		protected V delegateCreateEntity(V entity) {
+			return (V) getRemoteEntityManager().createEntity(url, createTokenBasedUserCredentials(), entity);
 		}
 	}
 
