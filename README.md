@@ -1,6 +1,8 @@
 # Highrise Java API
 
-Highrise Java API is a java client library for the [Highrise CRM API](http://github.com/37signals/highrise-api/). It contains the main entities of Highrise as Java classes and provides a clean and simple to use API to access the entities from Highrise.
+Highrise Java API is a java client library for the [Highrise CRM API](http://github.com/37signals/highrise-api/). It contains the main entities of Highrise as Java classes and provides a clean and simple to use API to access the entities from Highrise. As this project was extracted from an Highrise Android app, the client library can be used for Android apps, too.
+
+The Highrise Java API is still under development. Therefore only a limited set of entities and resource are supported yet. Most resources provide read access only. Creating and updating entities is in an experimental stage. If you would  like to contribute feel free to open a pull request.
 
 ## Entities and Resources
 
@@ -40,7 +42,7 @@ The `auth` method returns the token which might be stored by the application to 
 
     HighriseClient highriseClient = HighriseClient.create("https://example.highrisehq.com/", "token");
 
-### Requesting data
+### Working with resources
 
 Data can be requested via type specific resources. For each supported entity there is a resource, which provides access to the entity data. The method `getResource(Class<? extends EntityResource>)` returns a resource for the given resource class. Each resource has methods like `get`, `getAll`, `create` and `update` (create and updated are not fully implemented yet). Some resources define extra functions like the `TaskResource`, which has a method `getCompleted` that only returns the completed tasks.
 
