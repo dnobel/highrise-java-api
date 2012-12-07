@@ -26,10 +26,21 @@ The Highrise Java API is still under development. Therefore only a limited set o
 * Task
 * User
 
+## How to use with maven
 
-## Usage
+As Highrise Java API is not yet deployed on a public maven repoistory, you must deploy it into your local repository fist. Therefore clone the repo with git clone git://github.com/dnobel/highrise-java-api.git, call `mvn install` and add a dependency to your maven project:
 
-### Login and authentication
+    <dependency>
+        <groupId>org.nobel</groupId>
+        <artifactId>org.nobel.highriseapi</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </dependency>
+
+Important: You must build/deploy/etc your project with a special property, because the Highrise API pom has to profiles, which define different dependencies for web and android use (mainly because of spring). These profiles are activated via the properties `web-build` and `android-build`. Therefore start your maven build with `mvn package -Dandroid-build` for an android app for example. In the future it might be better to have two different artifacts, but that makes it hard to handle in one eclipse project.
+
+## API Usage
+
+### Login and Authentication
 
 The HighriseClient class provides a facade for accessing all resources. At first a client must be instantiated for a specific URL. If you already have an API token, you can create the client with the token as second argument directly. Otherwise you must only provide the base URL of the Highrise REST API. In the next step you can authenticate the client against the API with a username and a password. The client ist stateful, which means that it stores the API token after the authentication and uses it for all following request.   
 
@@ -42,7 +53,7 @@ The `auth` method returns the token which might be stored by the application to 
 
     HighriseClient highriseClient = HighriseClient.create("https://example.highrisehq.com/", "token");
 
-### Working with resources
+### Working with Resources
 
 Data can be requested via type specific resources. For each supported entity there is a resource, which provides access to the entity data. The method `getResource(Class<? extends EntityResource>)` returns a resource for the given resource class. Each resource has methods like `get`, `getAll`, `create` and `update` (create and updated are not fully implemented yet). Some resources define extra functions like the `TaskResource`, which has a method `getCompleted` that only returns the completed tasks.
 
