@@ -109,6 +109,8 @@ Highrise Java API supports a simple in memory cache, that caches lists of entiti
     
 ## License
 
+Copyright 2012 Dennis Nobel
+
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
