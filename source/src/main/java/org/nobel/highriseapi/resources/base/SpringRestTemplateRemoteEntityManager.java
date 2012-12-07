@@ -20,20 +20,20 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
 
-public class RemoteEntityManagerImpl implements RemoteEntityManager {
+public class SpringRestTemplateRemoteEntityManager implements RemoteEntityManager {
 
-    private static RemoteEntityManagerImpl instance;
+    private static SpringRestTemplateRemoteEntityManager instance;
 
-    public static RemoteEntityManagerImpl getInstance() {
+    public static SpringRestTemplateRemoteEntityManager getInstance() {
         if (instance == null) {
-            instance = new RemoteEntityManagerImpl();
+            instance = new SpringRestTemplateRemoteEntityManager();
         }
         return instance;
     }
 
     private final RestTemplate restTemplate;
 
-    public RemoteEntityManagerImpl() {
+    public SpringRestTemplateRemoteEntityManager() {
         restTemplate = new RestTemplate();
         restTemplate.getMessageConverters().add(getXmlConverter());
     }

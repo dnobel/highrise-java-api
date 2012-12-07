@@ -1,16 +1,17 @@
 package org.nobel.highriseapi.resources;
 
+import org.nobel.highriseapi.HighriseClientConfig;
 import org.nobel.highriseapi.entities.User;
 import org.nobel.highriseapi.entities.lists.UserList;
 import org.nobel.highriseapi.resources.base.EntityCacheProvider;
 import org.nobel.highriseapi.resources.base.EntityResource;
-import org.nobel.highriseapi.resources.base.RemoteEntityManagerImpl;
 import org.nobel.highriseapi.resources.base.RestResourceConfig;
+import org.nobel.highriseapi.resources.base.SpringRestTemplateRemoteEntityManager;
 
 public class UserResource extends EntityResource<User> {
 
-    public UserResource(String baseUrl, String token, EntityCacheProvider entityCacheProvider) {
-        super(baseUrl, token, entityCacheProvider);
+    public UserResource(HighriseClientConfig clientConfig, EntityCacheProvider entityCacheProvider) {
+        super(clientConfig, entityCacheProvider);
     }
 
     public User getMe() {
@@ -22,8 +23,8 @@ public class UserResource extends EntityResource<User> {
     }
 
     public User getMe(UserCredentials userCredentials) {
-        return (User) RemoteEntityManagerImpl.getInstance().getEntity(buildResourceUrl(getBaseUrl(), "me.xml"),
-                userCredentials, getEntityConfig().type);
+        return (User) SpringRestTemplateRemoteEntityManager.getInstance().getEntity(
+                buildResourceUrl(getBaseUrl(), "me.xml"), userCredentials, getEntityConfig().type);
     }
 
     @Override

@@ -16,21 +16,19 @@ public class HighriseClient {
         return new HighriseClient(baseUrl, token);
     }
 
-    private final String baseUrl;
+    private final HighriseClientConfig clientConfig;
 
     private final EntityCacheProvider entityCacheProvider;
 
-    private String token;
-
     private HighriseClient(String baseUrl, String token) {
-        this.baseUrl = baseUrl;
-        this.token = token;
+        this.clientConfig = new HighriseClientConfig(baseUrl, token, false);
         this.entityCacheProvider = new EntityCacheProvider();
     }
 
     public String auth(String user, String password) throws InvalidUserCredentialsException {
-        this.token = getResource(UserResource.class).getMe(user, password).getToken();
-        return this.token;
+        String token = getResource(UserResource.class).getMe(user, password).getToken();
+        this.clientConfig.setToken(token);
+        return token;
     }
 
     public User getLoggedInUser() {
@@ -38,12 +36,16 @@ public class HighriseClient {
     }
 
     public <T extends EntityResource<?>> T getResource(Class<T> resourceClass) {
-        return EntityResourceFactory.getInstance().createEntityResource(baseUrl, token, entityCacheProvider,
+        return EntityResourceFactory.getInstance().createEntityResource(clientConfig, entityCacheProvider,
                 resourceClass);
     }
 
     public String getToken() {
-        return token;
+        return clientConfig.getToken();
+    }
+
+    public void setUseCache(boolean useCache) {
+        this.clientConfig.setUseCache(useCache);
     }
 
 }

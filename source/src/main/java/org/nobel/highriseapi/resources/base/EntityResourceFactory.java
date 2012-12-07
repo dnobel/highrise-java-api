@@ -2,6 +2,8 @@ package org.nobel.highriseapi.resources.base;
 
 import java.lang.reflect.Constructor;
 
+import org.nobel.highriseapi.HighriseClientConfig;
+
 public class EntityResourceFactory {
 
     private static EntityResourceFactory instance;
@@ -17,13 +19,13 @@ public class EntityResourceFactory {
 
     }
 
-    public <T extends EntityResource<?>> T createEntityResource(String baseUrl, String token,
+    public <T extends EntityResource<?>> T createEntityResource(HighriseClientConfig clientConfig,
             EntityCacheProvider entityCacheProvider, Class<T> entityResourceClass) {
 
         try {
-            Constructor<T> constructor = entityResourceClass.getConstructor(String.class, String.class,
+            Constructor<T> constructor = entityResourceClass.getConstructor(HighriseClientConfig.class,
                     EntityCacheProvider.class);
-            return constructor.newInstance(baseUrl, token, entityCacheProvider);
+            return constructor.newInstance(clientConfig, entityCacheProvider);
         }
         catch (Exception exception) {
             return null;

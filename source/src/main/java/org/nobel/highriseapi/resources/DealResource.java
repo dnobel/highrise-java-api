@@ -1,5 +1,6 @@
 package org.nobel.highriseapi.resources;
 
+import org.nobel.highriseapi.HighriseClientConfig;
 import org.nobel.highriseapi.entities.Deal;
 import org.nobel.highriseapi.entities.lists.DealList;
 import org.nobel.highriseapi.resources.base.EntityCacheProvider;
@@ -8,8 +9,8 @@ import org.nobel.highriseapi.resources.base.RestResourceConfig;
 
 public class DealResource extends EntityResource<Deal> {
 
-    public DealResource(String baseUrl, String token, EntityCacheProvider entityCacheProvider) {
-        super(baseUrl, token, entityCacheProvider);
+    public DealResource(HighriseClientConfig clientConfig, EntityCacheProvider entityCacheProvider) {
+        super(clientConfig, entityCacheProvider);
     }
 
     @Override
