@@ -1,6 +1,6 @@
 # Highrise Java API
 
-Highrise Java API is a java client library for the [Highrise CRM API](http://github.com/37signals/highrise-api/). It contains the main entities of Highrise as Java classes and provides a clean and simple to use API to access the entities from Highrise. As this project was extracted from an Highrise Android app, the client library can be used for Android apps, too.
+Highrise Java API is a java client library for the [Highrise CRM API](http://github.com/37signals/highrise-api/). It contains the main entities of Highrise as Java classes and provides a clean and simple to use API to access the entities from Highrise. As this project was extracted from an Highrise Android app (see https://play.google.com/store/apps/details?id=org.nobel.topliftcrm), the client library can be used for Android apps, too.
 
 The Highrise Java API is still under development. Therefore only a limited set of entities and resource are supported yet. Most resources provide read access only. Creating and updating entities is in an experimental stage. If you would  like to contribute feel free to open a pull request.
 
@@ -28,7 +28,7 @@ The Highrise Java API is still under development. Therefore only a limited set o
 
 ## How to use with maven
 
-As Highrise Java API is not yet deployed on a public maven repoistory, you must deploy it into your local repository fist. Therefore clone the repo with git clone git://github.com/dnobel/highrise-java-api.git, call `mvn install` and add a dependency to your maven project:
+As Highrise Java API is not yet deployed on a public maven repoistory, you must deploy it into your local repository fist. Therefore clone the repo with `git clone git://github.com/dnobel/highrise-java-api.git`, call `mvn install` and add a dependency to your maven project:
 
     <dependency>
         <groupId>org.nobel</groupId>
