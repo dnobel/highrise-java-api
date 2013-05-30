@@ -11,7 +11,7 @@ public class HighriseClientTest {
     HighriseClient highriseClient;
 
     @Test
-    @Igonore
+    @Ignore
     public void getMe() throws Exception {
         highriseClient = HighriseClient.create("X");
         Assert.assertNotNull(highriseClient.auth("X", "X"));
