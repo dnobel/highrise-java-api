@@ -26,7 +26,16 @@ The Highrise Java API is still under development. Therefore only a limited set o
 * Task
 * User
 
-## How to use with maven
+## How to use
+
+### Download JAR (with dependencies)
+
+Last versions from Highrise Java API can be downloaded as JAR with packaged dependencies:
+
+* [highrise-java-api-1.0.jar](https://github.com/dnobel/highrise-java-api/raw/master/release/highrise-java-api-1.0.jar) (Web version)
+* [highrise-java-api-android-1.0.jar](https://github.com/dnobel/highrise-java-api/raw/master/release/highrise-java-api-android-1.0.jar) (Android version)
+
+### Maven
 
 As Highrise Java API is not yet deployed on a public maven repoistory, you must deploy it into your local repository fist. Therefore clone the repo with `git clone git://github.com/dnobel/highrise-java-api.git`, call `mvn install` and add a dependency to your maven project:
 
