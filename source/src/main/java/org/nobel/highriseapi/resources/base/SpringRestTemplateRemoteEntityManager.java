@@ -4,9 +4,11 @@ import java.nio.charset.Charset;
 
 import org.apache.commons.codec.binary.Base64;
 import org.nobel.highriseapi.entities.Party;
+import org.nobel.highriseapi.entities.Recording;
 import org.nobel.highriseapi.entities.base.Entity;
 import org.nobel.highriseapi.mapper.HighriseTypeMatcher;
 import org.nobel.highriseapi.mapper.PartyConverter;
+import org.nobel.highriseapi.mapper.RecordingConverter;
 import org.nobel.highriseapi.mapper.SimpleXmlHttpMessageConverter;
 import org.nobel.highriseapi.resources.base.EntityResource.UserCredentials;
 import org.simpleframework.xml.Serializer;
@@ -78,6 +80,7 @@ public class SpringRestTemplateRemoteEntityManager implements RemoteEntityManage
             Registry registry = new Registry();
             Serializer serializer = new Persister(new RegistryStrategy(registry), new HighriseTypeMatcher());
             registry.bind(Party.class, new PartyConverter(serializer));
+            registry.bind(Recording.class, new RecordingConverter(serializer));
             xmlConverter = new SimpleXmlHttpMessageConverter(serializer);
         }
         catch (Exception ex) {
