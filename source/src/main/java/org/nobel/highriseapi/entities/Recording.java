@@ -6,7 +6,7 @@ import org.nobel.highriseapi.entities.base.Entity;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Transient;
 
-public class Recording extends Entity {
+public class Recording extends Entity implements Comparable<Recording> {
 
     public enum SubjectType {
         Deal,
@@ -37,6 +37,15 @@ public class Recording extends Entity {
     @Element(name = "updated-at", required = false)
     private Date updatedAt;
 
+    public int compareTo(Recording other) {
+        if (this.getUpdatedAt() != null && other.getUpdatedAt() != null) {
+            return this.getUpdatedAt().compareTo(other.getUpdatedAt());
+        }
+        else {
+            return 0;
+        }
+    }
+
     public User getAuthor() {
         return author;
     }
@@ -56,7 +65,6 @@ public class Recording extends Entity {
     public int getSubjectId() {
         return subjectId;
     }
-
 
     public String getSubjectName() {
         return subjectName;
