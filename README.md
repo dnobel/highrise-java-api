@@ -42,7 +42,7 @@ Last versions from Highrise Java API can be downloaded as JAR with packaged depe
 
 ### Maven
 
-As Highrise Java API is not yet deployed on a public maven repoistory, you must deploy it into your local repository fist. Therefore clone the repo with `git clone git://github.com/dnobel/highrise-java-api.git`, call `mvn install` and add a dependency to your maven project:
+As Highrise Java API is not yet deployed on a public maven repoistory, you must deploy it into your local repository fist. Therefore clone the repo with `git clone git://github.com/dnobel/highrise-java-api.git`, call `mvn install -Dweb-build` (for web version) and add a dependency to your maven project:
 
     <dependency>
         <groupId>org.nobel</groupId>
