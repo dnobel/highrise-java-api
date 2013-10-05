@@ -21,7 +21,7 @@ public class Deal extends EntityWithName {
     @Element
     private String background;
 
-    @Element
+	@Element(required = false)
     private Category category;
 
     @Element
