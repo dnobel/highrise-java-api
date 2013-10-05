@@ -38,7 +38,7 @@ Last versions from Highrise Java API can be downloaded as JAR with packaged depe
 
 * [highrise-java-api-1.0.1.jar](https://github.com/dnobel/highrise-java-api/raw/master/release/highrise-java-api-1.0.1.jar) (Web version)
 * [highrise-java-api-1.0.1-with-dependencies.jar](https://github.com/dnobel/highrise-java-api/raw/master/release/highrise-java-api-1.0.1-with-dependencies.jar) (Web version with dependencies)
-* [highrise-java-api-android-1.0.1.jar](https://github.com/dnobel/highrise-java-api/raw/master/release/highrise-java-api-android-1.0.1.jar) (Android version)
+* [highrise-java-api-android-1.0.1.jar](https://github.com/dnobel/highrise-java-api/raw/master/release/highrise-java-api-1.0.1-android.jar) (Android version)
 
 ### Maven
 
