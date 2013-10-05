@@ -36,8 +36,9 @@ The Highrise Java API is still under development. Therefore only a limited set o
 
 Last versions from Highrise Java API can be downloaded as JAR with packaged dependencies:
 
-* [highrise-java-api-1.0.jar](https://github.com/dnobel/highrise-java-api/raw/master/release/highrise-java-api-1.0.jar) (Web version)
-* [highrise-java-api-android-1.0.jar](https://github.com/dnobel/highrise-java-api/raw/master/release/highrise-java-api-android-1.0.jar) (Android version)
+* [highrise-java-api-1.0.1.jar](https://github.com/dnobel/highrise-java-api/raw/master/release/highrise-java-api-1.0.1.jar) (Web version)
+* [highrise-java-api-1.0.1-with-dependencies.jar](https://github.com/dnobel/highrise-java-api/raw/master/release/highrise-java-api-1.0.1-with-dependencies.jar) (Web version with dependencies)
+* [highrise-java-api-android-1.0.1.jar](https://github.com/dnobel/highrise-java-api/raw/master/release/highrise-java-api-android-1.0.1.jar) (Android version)
 
 ### Maven
 
@@ -46,7 +47,7 @@ As Highrise Java API is not yet deployed on a public maven repoistory, you must 
     <dependency>
         <groupId>org.nobel</groupId>
         <artifactId>org.nobel.highriseapi</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.0.1-SNAPSHOT</version>
     </dependency>
 
 Important: You must build/deploy/etc your project with a special property, because the Highrise API pom has to profiles, which define different dependencies for web and android use (mainly because of spring). These profiles are activated via the properties `web-build` and `android-build`. Therefore start your maven build with `mvn package -Dandroid-build` for an android app for example. In the future it might be better to have two different artifacts, but that makes it hard to handle in one eclipse project.
