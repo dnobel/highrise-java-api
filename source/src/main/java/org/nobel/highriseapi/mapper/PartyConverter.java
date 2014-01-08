@@ -18,8 +18,11 @@ public class PartyConverter implements Converter<Party> {
     }
 
     public Party read(InputNode node) throws Exception {
-
         Person contact = serializer.read(Person.class, node);
+        InputNode typeAttribute = node.getAttribute("type");
+        if (typeAttribute != null) {
+            contact.setType(typeAttribute.getValue());
+        }
 
         if (contact.getType().equals("Company")) {
             Company company = new Company();
@@ -33,11 +36,9 @@ public class PartyConverter implements Converter<Party> {
         else {
             return contact;
         }
-
     }
 
     public void write(OutputNode node, Party party) throws Exception {
         // serialization not yet needed
     }
-
 }
