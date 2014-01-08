@@ -1,23 +1,61 @@
 package org.nobel.highriseapi;
 
-import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.nobel.highriseapi.entities.Person;
 import org.nobel.highriseapi.resources.PersonResource;
 import org.nobel.highriseapi.resources.UserResource;
 
-public class HighriseClientTest {
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-    HighriseClient highriseClient;
+import static java.lang.System.getProperty;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
+/*
+ Define the following properties with -D
+
+ baseUrl - point to your Highrise instance, with trailing "/"
+ username - your Highrise account name
+ password - your Highrise account password
+
+ Remove @Ignore and provide any your Highrise instance specific data (such as names or email addresses)
+ */
+public class HighriseClientTest {
+    private static final Integer TEST_PERSON_ID = 193370377;
+    private static final String TEST_PERSON_EMAIL = "test.person@reaktor.fi";
+    private HighriseClient client;
+
+    @Before
+    public void create() throws Exception {
+        client = HighriseClient.create(getProperty("baseUrl"));
+        client.auth(getProperty("username"), getProperty("password"));
+    }
 
     @Test
-    @Ignore
-    public void getMe() throws Exception {
-        highriseClient = HighriseClient.create("X");
-        Assert.assertNotNull(highriseClient.auth("X", "X"));
-        Assert.assertNotNull(highriseClient.getResource(UserResource.class).getMe());
-        Assert.assertNotNull(highriseClient.getResource(PersonResource.class).getAll());
-        Assert.assertNotNull(highriseClient.getResource(PersonResource.class).get(120593863));
-        // highriseClient.getResource(PersonResource.class).get(111);
+    public void getMeHasValidUsername() throws Exception {
+        assertEquals(getProperty("username"), client.getResource(UserResource.class).getMe().getEmailAddress());
+    }
+
+    @Test
+    public void getAllReturnsMultiplePersons() throws Exception {
+        assertTrue(client.getResource(PersonResource.class).getAll().size() > 1);
+    }
+
+    @Test
+    public void getWithIdReturnsTestPerson() throws Exception {
+        assertEquals(TEST_PERSON_ID, client.getResource(PersonResource.class).get(TEST_PERSON_ID).getId());
+    }
+
+    @Test
+    public void searchByEmailReturnsTestPerson() throws Exception {
+        List<Person> people = client.getResource(PersonResource.class).searchByEmail(TEST_PERSON_EMAIL);
+        assertEquals(1, people.size());
+        assertEquals(TEST_PERSON_EMAIL, people.get(0).getContactData().getEMailAddresses().get(0).getAddress());
+        assertEquals(TEST_PERSON_ID, people.get(0).getId());
     }
 }
