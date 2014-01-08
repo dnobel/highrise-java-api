@@ -24,6 +24,7 @@
 		<profile>
 			<id>web</id>
 			<activation>
+                <activeByDefault>true</activeByDefault>
 				<property>
 					<name>web-build</name>
 				</property>
