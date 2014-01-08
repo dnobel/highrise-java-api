@@ -1,15 +1,15 @@
 package org.nobel.highriseapi;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
+import org.nobel.highriseapi.entities.Party;
 import org.nobel.highriseapi.entities.Person;
+import org.nobel.highriseapi.entities.Tag;
 import org.nobel.highriseapi.resources.PersonResource;
+import org.nobel.highriseapi.resources.TagResource;
 import org.nobel.highriseapi.resources.UserResource;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import static java.lang.System.getProperty;
 import static org.junit.Assert.assertEquals;
@@ -66,8 +66,21 @@ public class HighriseClientTest {
     }
 
     @Test
+    public void searchByTagReturnsTestPerson() throws Exception {
+        Tag testTag = client.getResource(TagResource.class).getTagByName(TEST_PERSON_TAG);
+        List<Party> parties = client.getResource(TagResource.class).getPartyByTag(testTag);
+        assertEquals(1, parties.size());
+        assertEquals(TEST_PERSON_ID, parties.get(0).getId());
+    }
+
+    @Test
     public void searchByNonExistingEmailReturnsEmptyList() throws Exception {
         List<Person> people = client.getResource(PersonResource.class).searchByEmail("email@addre.ss");
         assertEquals(0, people.size());
+    }
+
+    @Test
+    public void getTagsReturnsMultipleEntities() throws Exception {
+        assertTrue(client.getResource(TagResource.class).getAll().size() > 0);
     }
 }
