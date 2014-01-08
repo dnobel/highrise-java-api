@@ -9,7 +9,11 @@
 	<artifactId>org.nobel.highriseapi</artifactId>
 	<version>1.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
-	<repositories>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    </properties>
+    <repositories>
 		<repository>
 			<id>springsource-repo</id>
 			<name>SpringSource Repository</name>
