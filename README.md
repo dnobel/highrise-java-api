@@ -10,15 +10,16 @@ The Highrise Java API is still under development. Therefore only a limited set o
 
 * Case
 * Category
+* Comment
+* Company
 * Deal
 * EMail
 * Note
 * Person
-* Company
+* Recording
+* Tag
 * Task
 * User
-* Comment
-* Recording
 
 ### Supported resources
 
@@ -26,9 +27,10 @@ The Highrise Java API is still under development. Therefore only a limited set o
 * Deal
 * Note
 * Person
+* Recording(s)
+* Tag
 * Task
 * User
-* Recording(s)
 
 ## How to use
 
