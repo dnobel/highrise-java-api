@@ -64,4 +64,10 @@ public class HighriseClientTest {
         assertEquals(TEST_PERSON_EMAIL, people.get(0).getContactData().getEMailAddresses().get(0).getAddress());
         assertEquals(TEST_PERSON_ID, people.get(0).getId());
     }
+
+    @Test
+    public void searchByNonExistingEmailReturnsEmptyList() throws Exception {
+        List<Person> people = client.getResource(PersonResource.class).searchByEmail("email@addre.ss");
+        assertEquals(0, people.size());
+    }
 }

@@ -12,7 +12,7 @@ import org.simpleframework.xml.Root;
 @Root(strict = false)
 public class PersonList implements EntityList<Person> {
 
-    @ElementList(inline = true, entry = "person")
+    @ElementList(inline = true, entry = "person", required = false)
     protected List<Person> entities = new ArrayList<Person>();
 
     public List<Person> getEntities() {
