@@ -28,6 +28,7 @@ import static org.junit.Assert.assertTrue;
 public class HighriseClientTest {
     private static final Integer TEST_PERSON_ID = 193370377;
     private static final String TEST_PERSON_EMAIL = "test.person@reaktor.fi";
+    private static final String TEST_PERSON_TAG = "test-tag";
     private HighriseClient client;
 
     @Before
@@ -49,6 +50,11 @@ public class HighriseClientTest {
     @Test
     public void getWithIdReturnsTestPerson() throws Exception {
         assertEquals(TEST_PERSON_ID, client.getResource(PersonResource.class).get(TEST_PERSON_ID).getId());
+    }
+
+    @Test
+    public void getWithIdReturnsTags() throws Exception {
+        assertEquals(TEST_PERSON_TAG, client.getResource(PersonResource.class).get(TEST_PERSON_ID).getTags().get(0).getName());
     }
 
     @Test

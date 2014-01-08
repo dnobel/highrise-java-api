@@ -5,8 +5,10 @@ import org.nobel.highriseapi.entities.base.EntityWithAvatarUrl;
 import org.nobel.highriseapi.entities.base.EntityWithImage;
 import org.nobel.highriseapi.entities.base.EntityWithName;
 import org.simpleframework.xml.Element;
+import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Transient;
 
+import java.util.List;
 
 public class Party extends EntityWithName implements EntityWithAvatarUrl, EntityWithImage {
 
@@ -27,6 +29,9 @@ public class Party extends EntityWithName implements EntityWithAvatarUrl, Entity
 
     @Element(name = "type", required = false)
     private String type;
+
+    @ElementList(required = false)
+    private List<Tag> tags;
 
     public String getAvatarUrl() {
         return avatarUrl;
@@ -66,5 +71,13 @@ public class Party extends EntityWithName implements EntityWithAvatarUrl, Entity
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
     }
 }
