@@ -2,19 +2,24 @@ package org.nobel.highriseapi;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.nobel.highriseapi.entities.Note;
 import org.nobel.highriseapi.entities.Party;
 import org.nobel.highriseapi.entities.Person;
+import org.nobel.highriseapi.entities.Recording;
 import org.nobel.highriseapi.entities.Tag;
+import org.nobel.highriseapi.resources.NoteResource;
 import org.nobel.highriseapi.resources.PersonResource;
 import org.nobel.highriseapi.resources.TagResource;
 import org.nobel.highriseapi.resources.UserResource;
 
+import java.util.Date;
 import java.util.List;
 
 import static java.lang.System.getProperty;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+import static org.nobel.highriseapi.resources.NoteResource.NoteKind.PERSON_NOTES;
 
 /*
  Define the following properties with -D
@@ -29,6 +34,7 @@ public class HighriseClientTest {
     private static final Integer TEST_PERSON_ID = 193370377;
     private static final String TEST_PERSON_EMAIL = "test.person@reaktor.fi";
     private static final String TEST_PERSON_TAG = "test-tag";
+    private static final String TEST_PERSON_NAME = "Test Person";
     private HighriseClient client;
 
     @Before
@@ -67,7 +73,7 @@ public class HighriseClientTest {
 
     @Test
     public void searchByNameReturnsTestPerson() throws Exception {
-        List<Person> people = client.getResource(PersonResource.class).searchByName("Test Person");
+        List<Person> people = client.getResource(PersonResource.class).searchByName(TEST_PERSON_NAME);
         assertEquals(1, people.size());
         assertEquals(TEST_PERSON_EMAIL, people.get(0).getContactData().getEMailAddresses().get(0).getAddress());
         assertEquals(TEST_PERSON_ID, people.get(0).getId());
@@ -90,5 +96,12 @@ public class HighriseClientTest {
     @Test
     public void getTagsReturnsMultipleEntities() throws Exception {
         assertTrue(client.getResource(TagResource.class).getAll().size() > 0);
+    }
+
+    @Test
+    public void addNoteWithHtmlForTestPerson() throws Exception {
+        Note note = new Note();
+        note.setBody("<html><body><b>Test comment</b><br/>filed with Java Technology</body></html>");
+        assertNotNull(client.getResource(NoteResource.class).createForEntity(PERSON_NOTES, TEST_PERSON_ID, note));
     }
 }
