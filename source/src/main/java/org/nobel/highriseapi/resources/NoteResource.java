@@ -16,7 +16,7 @@ import org.nobel.highriseapi.resources.base.RestResourceConfig;
 public class NoteResource extends EntityResource<Note> {
 
     public enum NoteKind {
-        CASE_NOTES("kases/{id}/notes.xml"), DEAL_NOTES("deals/{id}/notes.xml");
+        CASE_NOTES("kases/{id}/notes.xml"), DEAL_NOTES("deals/{id}/notes.xml"), PERSON_NOTES("people/{id}/notes.xml");
 
         public String resourceUrl;
 
@@ -30,7 +30,6 @@ public class NoteResource extends EntityResource<Note> {
     }
 
     public Note createForEntity(NoteKind noteKind, int entityId, Note note) {
-
         String url = buildResourceUrl(getBaseUrl(), noteKind.resourceUrl);
         url = replaceVariablesInUrl(url, createIdVariableReplacement(entityId));
 
@@ -44,7 +43,6 @@ public class NoteResource extends EntityResource<Note> {
     }
 
     public List<Note> getAll(NoteKind noteKind, int id) {
-
         Class<?> type = getEntityListConfig().type;
         String url = buildResourceUrl(getBaseUrl(), noteKind.resourceUrl);
         EntityCache cache = getCache(noteKind.name());
