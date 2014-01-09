@@ -11,6 +11,7 @@ public class Recording extends Entity implements Comparable<Recording> {
     public enum SubjectType {
         Deal,
         Kase,
+        Party
     }
 
     @Transient
@@ -25,13 +26,13 @@ public class Recording extends Entity implements Comparable<Recording> {
     @Element(name = "created-at", required = false)
     private Date createdAt;
 
-    @Element(name = "subject-id")
+    @Element(name = "subject-id", required = false)
     private int subjectId;
 
-    @Element(name = "subject-name")
+    @Element(name = "subject-name", required = false)
     private String subjectName;
 
-    @Element(name = "subject-type")
+    @Element(name = "subject-type", required = false)
     private SubjectType subjectType;
 
     @Element(name = "updated-at", required = false)
