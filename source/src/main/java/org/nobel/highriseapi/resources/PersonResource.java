@@ -8,10 +8,10 @@ import org.nobel.highriseapi.resources.base.EntityResource;
 import org.nobel.highriseapi.resources.base.RestResourceConfig;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.google.common.collect.ImmutableMap.of;
 import static org.springframework.util.StringUtils.collectionToDelimitedString;
 
 public class PersonResource extends EntityResource<Person> {
@@ -30,11 +30,9 @@ public class PersonResource extends EntityResource<Person> {
     }
 
     @SuppressWarnings("unchecked")
-    public List<Person> searchByEmail(final String address) {
-        Map<String, String> criteria = new HashMap<String, String>() {{
-            put("email", address);
-        }};
-        return search(criteria);
+    public List<Person> searchByEmail(String address) {
+        return search(of("email", address));
+    }
     }
 
     @SuppressWarnings("unchecked")
