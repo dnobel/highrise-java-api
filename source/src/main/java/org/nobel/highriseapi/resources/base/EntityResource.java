@@ -8,6 +8,7 @@ import org.nobel.highriseapi.HighriseClientConfig;
 import org.nobel.highriseapi.entities.EntityList;
 import org.nobel.highriseapi.entities.base.Entity;
 import org.nobel.highriseapi.resources.base.EntityCacheProvider.EntityCache;
+import org.springframework.util.MultiValueMap;
 
 public abstract class EntityResource<T extends Entity> {
 
@@ -21,11 +22,6 @@ public abstract class EntityResource<T extends Entity> {
             super(cache, useCache);
             this.url = url;
             this.type = type;
-        }
-
-        public RemoteEntityAccessorWithCacheSupport(String url, Map<Integer, Entity> cache, boolean useCache) {
-            super(cache, useCache);
-            this.url = url;
         }
 
         @SuppressWarnings("unchecked")
@@ -44,6 +40,12 @@ public abstract class EntityResource<T extends Entity> {
         @Override
         protected V delegateGetEntity(int id) {
             return (V) getRemoteEntity();
+        }
+
+        @SuppressWarnings("unchecked")
+        @Override
+        protected V delegateCreateEntityFromMultipartFormData(MultiValueMap<String, Object> parts) {
+            return (V) getRemoteEntityManager().createEntityFromMultipartFormData(url, createTokenBasedUserCredentials(), type, parts);
         }
 
         private Object getRemoteEntity() {

@@ -1,7 +1,5 @@
 package org.nobel.highriseapi.resources.base;
 
-import java.nio.charset.Charset;
-
 import org.apache.commons.codec.binary.Base64;
 import org.nobel.highriseapi.entities.Party;
 import org.nobel.highriseapi.entities.Recording;
@@ -19,8 +17,12 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
+import java.nio.charset.Charset;
+
+import static org.springframework.http.MediaType.MULTIPART_FORM_DATA;
 
 public class SpringRestTemplateRemoteEntityManager implements RemoteEntityManager {
 
@@ -59,7 +61,13 @@ public class SpringRestTemplateRemoteEntityManager implements RemoteEntityManage
     }
 
     public void updateEntity(String fullResourceUrl, UserCredentials userCredentials, Entity entity) {
+        throw new UnsupportedOperationException();
+    }
 
+    public <E> E createEntityFromMultipartFormData(String fullResourceUrl, UserCredentials userCredentials, Class<E> entityClass, MultiValueMap<String, Object> parts) {
+        HttpHeaders headers = createAuthorizationHeader(userCredentials);
+        headers.setContentType(MULTIPART_FORM_DATA);
+        return restTemplate.postForObject(fullResourceUrl, new HttpEntity<MultiValueMap<String, Object>>(parts, headers), entityClass);
     }
 
     private HttpHeaders createAuthorizationHeader(final UserCredentials userCredentials) {
