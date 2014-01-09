@@ -20,7 +20,7 @@ public class Recording extends Entity implements Comparable<Recording> {
     @Element(name = "author-id", required = false)
     private int authorId;
 
-    @Element
+    @Element(required = false)
     private String body;
 
     @Element(name = "created-at", required = false)
