@@ -66,6 +66,14 @@ public class HighriseClientTest {
     }
 
     @Test
+    public void searchByNameReturnsTestPerson() throws Exception {
+        List<Person> people = client.getResource(PersonResource.class).searchByName("Test Person");
+        assertEquals(1, people.size());
+        assertEquals(TEST_PERSON_EMAIL, people.get(0).getContactData().getEMailAddresses().get(0).getAddress());
+        assertEquals(TEST_PERSON_ID, people.get(0).getId());
+    }
+
+    @Test
     public void searchByTagReturnsTestPerson() throws Exception {
         Tag testTag = client.getResource(TagResource.class).getTagByName(TEST_PERSON_TAG);
         List<Party> parties = client.getResource(TagResource.class).getPartyByTag(testTag);

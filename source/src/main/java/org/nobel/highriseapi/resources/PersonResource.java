@@ -33,6 +33,11 @@ public class PersonResource extends EntityResource<Person> {
     public List<Person> searchByEmail(String address) {
         return search(of("email", address));
     }
+
+    @SuppressWarnings("unchecked")
+    public List<Person> searchByName(String name) {
+        String url = buildResourceUrl(getBaseUrl(), "people/search.xml?term=" + name);
+        return createRemoteEntityAccesor(PersonList.class, url).getEntityList();
     }
 
     @SuppressWarnings("unchecked")
