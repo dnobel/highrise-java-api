@@ -25,7 +25,6 @@ import java.nio.charset.Charset;
 import static org.springframework.http.MediaType.MULTIPART_FORM_DATA;
 
 public class SpringRestTemplateRemoteEntityManager implements RemoteEntityManager {
-
     private static SpringRestTemplateRemoteEntityManager instance;
 
     public static SpringRestTemplateRemoteEntityManager getInstance() {
@@ -45,18 +44,21 @@ public class SpringRestTemplateRemoteEntityManager implements RemoteEntityManage
     public Entity createEntity(String fullResourceUrl, UserCredentials userCredentials, Entity entity) {
         HttpHeaders requestHeaders = createAuthorizationHeader(userCredentials);
         HttpEntity<?> requestEntity = new HttpEntity<Object>(entity, requestHeaders);
-        ResponseEntity<? extends Entity> result = restTemplate.postForEntity(fullResourceUrl, requestEntity,
-                entity.getClass());
+        ResponseEntity<? extends Entity> result = restTemplate.postForEntity(fullResourceUrl, requestEntity, entity.getClass());
+        return result.getBody();
+    }
+
+    public Entity createEntity(String fullResourceUrl, UserCredentials userCredentials, Object entity, Class responseEntityClass) {
+        HttpHeaders requestHeaders = createAuthorizationHeader(userCredentials);
+        HttpEntity<?> requestEntity = new HttpEntity<Object>(entity, requestHeaders);
+        ResponseEntity<? extends Entity> result = restTemplate.postForEntity(fullResourceUrl, requestEntity, responseEntityClass);
         return result.getBody();
     }
 
     public <E> E getEntity(String fullResourceUrl, UserCredentials userCredentials, Class<E> entityClass) {
         HttpHeaders requestHeaders = createAuthorizationHeader(userCredentials);
         HttpEntity<?> requestEntity = new HttpEntity<Object>(requestHeaders);
-
-        ResponseEntity<E> responseEntity = restTemplate.exchange(fullResourceUrl, HttpMethod.GET, requestEntity,
-                entityClass);
-
+        ResponseEntity<E> responseEntity = restTemplate.exchange(fullResourceUrl, HttpMethod.GET, requestEntity, entityClass);
         return responseEntity.getBody();
     }
 
@@ -88,19 +90,15 @@ public class SpringRestTemplateRemoteEntityManager implements RemoteEntityManage
 
     private SimpleXmlHttpMessageConverter getXmlConverter() {
         SimpleXmlHttpMessageConverter xmlConverter = null;
-
         try {
             Registry registry = new Registry();
             Serializer serializer = new Persister(new RegistryStrategy(registry), new HighriseTypeMatcher());
             registry.bind(Party.class, new PartyConverter(serializer));
             registry.bind(Recording.class, new RecordingConverter(serializer));
             xmlConverter = new SimpleXmlHttpMessageConverter(serializer);
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
-
         return xmlConverter;
     }
-
 }

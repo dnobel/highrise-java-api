@@ -8,6 +8,8 @@ public interface RemoteEntityManager {
 
     public Entity createEntity(String fullResourceUrl, UserCredentials userCredentials, Entity entity);
 
+    public Entity createEntity(String fullResourceUrl, UserCredentials userCredentials, Object entity, Class responseEntityClass);
+
     public <E> E getEntity(String fullResourceUrl, UserCredentials userCredentials, Class<E> entityClass);
 
     public void updateEntity(String fullResourceUrl, UserCredentials userCredentials, Entity entity);

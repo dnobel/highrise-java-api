@@ -30,6 +30,11 @@ public abstract class EntityResource<T extends Entity> {
             return (V) getRemoteEntityManager().createEntity(url, createTokenBasedUserCredentials(), entity);
         }
 
+        @Override
+        protected V delegateCreateEntity(Object entity) {
+            return (V) getRemoteEntityManager().createEntity(url, createTokenBasedUserCredentials(), entity, this.type);
+        }
+
         @SuppressWarnings("unchecked")
         @Override
         protected EntityList<V> delegateGetAllEntities() {
@@ -86,6 +91,11 @@ public abstract class EntityResource<T extends Entity> {
 
     public void clear() {
         getDefaultResourceCache().clear();
+    }
+
+    public T create(T entity) {
+        String url = buildResourceUrl(getBaseUrl(), getEntityListConfig().path);
+        return (T) createRemoteEntityAccesor(getEntityListConfig().type, url).createEntity(entity);
     }
 
     @SuppressWarnings("unchecked")

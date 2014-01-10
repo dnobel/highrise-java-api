@@ -27,6 +27,14 @@ public abstract class EntityAccessorWithCacheSupport<T extends Entity> {
         return createdEntity;
     }
 
+    public T createEntity(Object entity) {
+        T createdEntity = delegateCreateEntity(entity);
+        if (useCache) {
+            cache.put(createdEntity.getId(), createdEntity);
+        }
+        return createdEntity;
+    }
+
     public T createEntityFromMultipartFormData(MultiValueMap<String, Object> parts) {
         T createdEntity = delegateCreateEntityFromMultipartFormData(parts);
         if (useCache) {
@@ -75,6 +83,8 @@ public abstract class EntityAccessorWithCacheSupport<T extends Entity> {
     }
 
     protected abstract T delegateCreateEntity(T entity);
+
+    protected abstract T delegateCreateEntity(Object entity);
 
     protected abstract EntityList<T> delegateGetAllEntities();
 
