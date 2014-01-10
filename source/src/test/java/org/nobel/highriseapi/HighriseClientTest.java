@@ -1,18 +1,18 @@
 package org.nobel.highriseapi;
 
+import com.google.common.collect.ImmutableList;
 import org.junit.Before;
 import org.junit.Test;
 import org.nobel.highriseapi.entities.Note;
 import org.nobel.highriseapi.entities.Party;
 import org.nobel.highriseapi.entities.Person;
-import org.nobel.highriseapi.entities.Recording;
 import org.nobel.highriseapi.entities.Tag;
+import org.nobel.highriseapi.entities.UploadAttachment;
 import org.nobel.highriseapi.resources.NoteResource;
 import org.nobel.highriseapi.resources.PersonResource;
 import org.nobel.highriseapi.resources.TagResource;
 import org.nobel.highriseapi.resources.UserResource;
 
-import java.util.Date;
 import java.util.List;
 
 import static java.lang.System.getProperty;
@@ -31,7 +31,7 @@ import static org.nobel.highriseapi.resources.NoteResource.NoteKind.PERSON_NOTES
  Remove @Ignore and provide any your Highrise instance specific data (such as names or email addresses)
  */
 public class HighriseClientTest {
-    private static final Integer TEST_PERSON_ID = 193370377;
+    private static final Integer TEST_PERSON_ID = 180552969;
     private static final String TEST_PERSON_EMAIL = "test.person@reaktor.fi";
     private static final String TEST_PERSON_TAG = "test-tag";
     private static final String TEST_PERSON_NAME = "Test Person";
@@ -103,5 +103,17 @@ public class HighriseClientTest {
         Note note = new Note();
         note.setBody("<html><body><b>Test comment</b><br/>filed with Java Technology</body></html>");
         assertNotNull(client.getResource(NoteResource.class).createForEntity(PERSON_NOTES, TEST_PERSON_ID, note));
+    }
+
+    @Test
+    public void addNoteWithAttachmentForTestPerson() throws Exception {
+        Note note = new Note();
+        note.setBody("Note");
+        note.setUploadAttachments(ImmutableList.of(new UploadAttachment(filePath("/kitten.jpg"))));
+        assertNotNull(client.getResource(NoteResource.class).createForEntity(PERSON_NOTES, person.getId(), note));
+    }
+
+    private String filePath(String resourceName) {
+        return getClass().getResource(resourceName).toExternalForm().replace("file:", "");
     }
 }
