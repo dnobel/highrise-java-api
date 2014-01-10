@@ -72,6 +72,7 @@ public class HighriseClientTest {
         Person created = client.getResource(PersonResource.class).get(person.getId());
         assertEquals(person.getId(), created.getId());
         assertEquals(TAG, created.getTags().get(0).getName());
+        assertEquals(EMAIL, created.getContactData().getEMailAddresses().get(0).getAddress());
     }
 
     @Test
