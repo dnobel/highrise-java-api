@@ -70,6 +70,11 @@ public class SpringRestTemplateRemoteEntityManager implements RemoteEntityManage
         return restTemplate.postForObject(fullResourceUrl, new HttpEntity<MultiValueMap<String, Object>>(parts, headers), entityClass);
     }
 
+    public void destroyEntity(String fullResourceUrl, UserCredentials userCredentials) {
+        HttpHeaders requestHeaders = createAuthorizationHeader(userCredentials);
+        restTemplate.exchange(fullResourceUrl, HttpMethod.DELETE, new HttpEntity<Object>(requestHeaders), Void.class);
+    }
+
     private HttpHeaders createAuthorizationHeader(final UserCredentials userCredentials) {
         return new HttpHeaders() {
             {

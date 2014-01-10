@@ -48,6 +48,11 @@ public abstract class EntityResource<T extends Entity> {
             return (V) getRemoteEntityManager().createEntityFromMultipartFormData(url, createTokenBasedUserCredentials(), type, parts);
         }
 
+        @Override
+        protected void delegateDestroyEntity(int id) {
+            getRemoteEntityManager().destroyEntity(url, createTokenBasedUserCredentials());
+        }
+
         private Object getRemoteEntity() {
             return getRemoteEntityManager().getEntity(url, createTokenBasedUserCredentials(), type);
         }
@@ -104,6 +109,13 @@ public abstract class EntityResource<T extends Entity> {
         String url = buildResourceUrl(getBaseUrl(), path);
 
         return createRemoteEntityAccesor(type, url).getEntityList();
+    }
+
+    public void destroy(int id) {
+        String path = getEntityConfig().path;
+        Map<String, String> variables = createIdVariableReplacement(id);
+        String url = replaceVariablesInUrl(buildResourceUrl(getBaseUrl(), path), variables);
+        createRemoteEntityAccesor(getEntityConfig().type, url).destroyEntity(id);
     }
 
     protected String buildResourceUrl(String baseUrl, String resourceUrl) {

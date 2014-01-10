@@ -13,4 +13,6 @@ public interface RemoteEntityManager {
     public void updateEntity(String fullResourceUrl, UserCredentials userCredentials, Entity entity);
 
     public <E> E createEntityFromMultipartFormData(String fullResourceUrl, UserCredentials userCredentials, Class<E> entityClass, MultiValueMap<String, Object> parts);
+
+    public void destroyEntity(String fullResourceUrl, UserCredentials userCredentials);
 }

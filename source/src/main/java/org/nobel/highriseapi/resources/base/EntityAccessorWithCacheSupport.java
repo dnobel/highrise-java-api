@@ -35,6 +35,13 @@ public abstract class EntityAccessorWithCacheSupport<T extends Entity> {
         return createdEntity;
     }
 
+    public void destroyEntity(int id) {
+        if (useCache) {
+            cache.remove(id);
+        }
+        delegateDestroyEntity(id);
+    }
+
     @SuppressWarnings("unchecked")
     public T getEntity(int id) {
 
@@ -74,4 +81,6 @@ public abstract class EntityAccessorWithCacheSupport<T extends Entity> {
     protected abstract T delegateGetEntity(int id);
 
     protected abstract T delegateCreateEntityFromMultipartFormData(MultiValueMap<String, Object> parts);
+
+    protected abstract void delegateDestroyEntity(int id);
 }
