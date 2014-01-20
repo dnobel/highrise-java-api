@@ -1,7 +1,9 @@
 package org.nobel.highriseapi.entities;
 
 import org.simpleframework.xml.Element;
+import org.simpleframework.xml.Root;
 
+@Root(name = "person", strict = false)
 public class Person extends Party {
 
     private static final long serialVersionUID = 4420548359319237886L;

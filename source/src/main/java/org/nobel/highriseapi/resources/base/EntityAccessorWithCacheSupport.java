@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.nobel.highriseapi.entities.EntityList;
 import org.nobel.highriseapi.entities.base.Entity;
+import org.springframework.util.MultiValueMap;
 
 public abstract class EntityAccessorWithCacheSupport<T extends Entity> {
 
@@ -23,7 +24,30 @@ public abstract class EntityAccessorWithCacheSupport<T extends Entity> {
         if (useCache) {
             cache.put(createdEntity.getId(), createdEntity);
         }
-        return entity;
+        return createdEntity;
+    }
+
+    public T createEntity(Object entity) {
+        T createdEntity = delegateCreateEntity(entity);
+        if (useCache) {
+            cache.put(createdEntity.getId(), createdEntity);
+        }
+        return createdEntity;
+    }
+
+    public T createEntityFromMultipartFormData(MultiValueMap<String, Object> parts) {
+        T createdEntity = delegateCreateEntityFromMultipartFormData(parts);
+        if (useCache) {
+            cache.put(createdEntity.getId(), createdEntity);
+        }
+        return createdEntity;
+    }
+
+    public void destroyEntity(int id) {
+        if (useCache) {
+            cache.remove(id);
+        }
+        delegateDestroyEntity(id);
     }
 
     @SuppressWarnings("unchecked")
@@ -60,7 +84,13 @@ public abstract class EntityAccessorWithCacheSupport<T extends Entity> {
 
     protected abstract T delegateCreateEntity(T entity);
 
+    protected abstract T delegateCreateEntity(Object entity);
+
     protected abstract EntityList<T> delegateGetAllEntities();
 
     protected abstract T delegateGetEntity(int id);
+
+    protected abstract T delegateCreateEntityFromMultipartFormData(MultiValueMap<String, Object> parts);
+
+    protected abstract void delegateDestroyEntity(int id);
 }

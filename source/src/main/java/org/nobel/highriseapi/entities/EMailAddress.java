@@ -14,6 +14,14 @@ public class EMailAddress extends Entity {
     @Element
     private String location;
 
+    public EMailAddress() {
+    }
+
+    public EMailAddress(String address, String location) {
+        this.address = address;
+        this.location = location;
+    }
+
     public String getAddress() {
         return address;
     }

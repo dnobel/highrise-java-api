@@ -9,32 +9,43 @@
 	<artifactId>org.nobel.highriseapi</artifactId>
 	<version>1.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
-	<repositories>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    </properties>
+    <repositories>
 		<repository>
 			<id>springsource-repo</id>
 			<name>SpringSource Repository</name>
 			<url>http://repo.springsource.org/release</url>
 		</repository>
 	</repositories>
+
 	<profiles>
 		<profile>
 			<id>web</id>
 			<activation>
+                <activeByDefault>true</activeByDefault>
 				<property>
 					<name>web-build</name>
 				</property>
 			</activation>
 			<dependencies>
-				<dependency>
+                <dependency>
+                    <groupId>com.google.guava</groupId>
+                    <artifactId>guava</artifactId>
+                    <version>15.0</version>
+                </dependency>
+                <dependency>
 					<groupId>org.springframework</groupId>
 					<artifactId>spring-webmvc</artifactId>
-					<version>3.1.3.RELEASE</version>
+					<version>3.2.6.RELEASE</version>
 				</dependency>
 
 				<dependency>
 					<groupId>org.springframework.security</groupId>
 					<artifactId>spring-security-config</artifactId>
-					<version>3.1.3.RELEASE</version>
+					<version>3.2.0.RELEASE</version>
 				</dependency>
 
 				<dependency>
@@ -64,7 +75,12 @@
 				</property>
 			</activation>
 			<dependencies>
-				<dependency>
+                <dependency>
+                    <groupId>com.google.guava</groupId>
+                    <artifactId>guava</artifactId>
+                    <version>15.0</version>
+                </dependency>
+                <dependency>
 					<groupId>org.springframework.android</groupId>
 					<artifactId>spring-android-rest-template</artifactId>
 					<version>1.0.0.RELEASE</version>

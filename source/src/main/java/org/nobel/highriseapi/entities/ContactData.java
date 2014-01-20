@@ -1,6 +1,7 @@
 package org.nobel.highriseapi.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.simpleframework.xml.ElementList;
@@ -12,10 +13,10 @@ public class ContactData implements Serializable {
     private static final long serialVersionUID = -4821662158481786596L;
 
     @ElementList(name = "phone-numbers")
-    List<PhoneNumber> phoneNumbers;
+    List<PhoneNumber> phoneNumbers = new ArrayList<PhoneNumber>();
 
     @ElementList(name = "email-addresses")
-    List<EMailAddress> eMailAddresses;
+    List<EMailAddress> eMailAddresses = new ArrayList<EMailAddress>();
 
     public List<PhoneNumber> getPhoneNumbers() {
         return phoneNumbers;
