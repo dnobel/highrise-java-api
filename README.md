@@ -1,3 +1,7 @@
+# ATTENTION: This project is no longer maintained
+
+Unfornately this project is no longer maintened. 
+
 # Highrise Java API
 
 Highrise Java API is a java client library for the [Highrise CRM API](http://github.com/37signals/highrise-api/). It contains the main entities of Highrise as Java classes and provides a clean and simple to use API to access the entities from Highrise. As this project was extracted from an Highrise Android app (see https://play.google.com/store/apps/details?id=org.nobel.topliftcrm), the client library can be used for Android apps, too.
